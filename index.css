@@ -1,0 +1,560 @@
+/* GLITCH CORE THEME */
+
+/* 1. Color Variables */
+:root {
+  /* Primary Colors */
+  --matrix-green: #00FF00;
+  --glitch-pink: #FF0080;
+  --glitch-blue: #0080FF;
+  --deep-black: #101010;
+  --pure-black: #000000;
+  --white: #FFFFFF;
+  
+  /* Glitch Effects */
+  --glitch-shadow: 2px 2px 0 var(--glitch-pink), -2px -2px 0 var(--glitch-blue);
+  --glitch-shadow-sm: 1px 1px 0 var(--glitch-pink), -1px -1px 0 var(--glitch-blue);
+}
+
+/* 2. Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--pure-black);
+  color: var(--matrix-green);
+  font-family: 'Space Grotesk', monospace;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Scanline effect */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 0, 0.03),
+    rgba(0, 255, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* 3. Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', monospace;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--matrix-green);
+}
+
+.text-glitch {
+  text-shadow: var(--glitch-shadow);
+  animation: glitch 1.5s infinite steps(2, end) alternate-reverse;
+}
+
+p, span, div, label, button {
+  font-family: 'Space Grotesk', monospace;
+}
+
+/* Override default div color */
+p, span, label {
+  color: var(--matrix-green);
+}
+
+code, pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* 4. Component Updates */
+
+@keyframes glitch {
+  0%, 100% { 
+    text-shadow: 1.5px 1.5px 0 var(--glitch-pink), -1.5px -1.5px 0 var(--glitch-blue);
+    transform: translate(0, 0);
+  }
+  25% { 
+    text-shadow: -1.5px 1.5px 0 var(--glitch-pink), 1.5px -1.5px 0 var(--glitch-blue); 
+    transform: translate(1px, -1px);
+  }
+  50% { 
+    text-shadow: 1.5px -1.5px 0 var(--glitch-pink), -1.5px 1.5px 0 var(--glitch-blue);
+    transform: translate(-1px, 1px);
+  }
+  75% {
+    text-shadow: -1.5px -1.5px 0 var(--glitch-pink), 1.5px 1.5px 0 var(--glitch-blue);
+    transform: translate(1px, 1px);
+  }
+}
+
+/* Buttons */
+.btn-primary, button[type="submit"], .cta-button {
+  background: var(--matrix-green);
+  color: var(--pure-black);
+  font-weight: 700;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 3px 3px 0 var(--glitch-pink), -3px -3px 0 var(--glitch-blue);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-family: 'Space Grotesk', monospace;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--glitch-pink), -5px -5px 0 var(--glitch-blue);
+}
+
+.btn-primary:disabled {
+    background: #555;
+    color: #999;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+.btn-secondary {
+  background: transparent;
+  color: var(--matrix-green);
+  border: 2px solid var(--matrix-green);
+  padding: 12px 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  font-family: 'Space Grotesk', monospace;
+  cursor: pointer;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--matrix-green);
+  color: var(--pure-black);
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: transparent;
+    color: var(--matrix-green);
+    box-shadow: none;
+}
+
+/* Cards/Containers */
+.card, .panel {
+  background: var(--deep-black);
+  border: 1px solid var(--matrix-green);
+  border-radius: 4px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before, .panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 0, 0.03),
+    rgba(0, 255, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+}
+
+.card:hover, .panel:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+  border-color: var(--glitch-pink);
+}
+
+/* Input Fields */
+input[type="text"], textarea, select {
+  background: var(--pure-black);
+  border: 1px solid var(--matrix-green);
+  color: var(--matrix-green);
+  padding: 12px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+input[type="text"]:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--glitch-pink);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5), 0 0 20px rgba(255, 0, 128, 0.3);
+}
+
+input[type="text"]::placeholder, textarea::placeholder {
+  color: rgba(0, 255, 0, 0.3);
+}
+
+/* 5. Navigation Bar */
+header.navbar {
+  background: var(--pure-black);
+  border-bottom: 1px solid var(--matrix-green);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  z-index: 20;
+}
+
+header.navbar a {
+  color: var(--matrix-green);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+}
+
+header.navbar a:hover {
+  text-shadow: 0 0 10px var(--matrix-green);
+}
+
+/* 6. Hero Section */
+.hero {
+  background: var(--pure-black);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1120px; /* 70rem */
+  margin: 0 auto;
+  text-align: center;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+
+/* 7. Special Effects */
+.main-title {
+  position: relative;
+  animation: glitch 2s infinite;
+  font-size: 3.75rem; /* 60px */
+  font-weight: 900;
+  letter-spacing: -0.025em;
+}
+
+.subtitle::after {
+  content: '_';
+  animation: blink 1s infinite;
+  color: var(--matrix-green);
+  font-weight: 700;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* 8. Footer */
+footer.main-toolbar {
+  background: var(--deep-black);
+  border: 1px solid var(--matrix-green);
+  color: var(--matrix-green);
+  border-radius: 16px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Custom App Styles */
+.spinner-color {
+  color: var(--matrix-green);
+}
+
+.btn-icon {
+  background: var(--deep-black);
+  color: var(--matrix-green);
+  border: 1px solid var(--matrix-green);
+  border-radius: 9999px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-icon:hover:not(:disabled) {
+  box-shadow: 0 0 10px var(--matrix-green);
+  border-color: var(--glitch-pink);
+  transform: scale(1.05);
+}
+
+.btn-icon:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-tool {
+  width: 64px;
+  height: 56px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+  color: var(--matrix-green);
+  cursor: pointer;
+}
+
+.btn-tool:hover:not(:disabled) {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.btn-tool.active {
+    background: var(--matrix-green);
+    color: var(--pure-black);
+}
+
+.btn-tool:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.main-action-btn {
+  width: 96px;
+  height: 56px;
+  padding: 0; /* Override default padding */
+}
+
+.fusion-badge {
+    background: var(--deep-black);
+    border: 1px solid var(--matrix-green);
+    color: var(--matrix-green);
+    text-shadow: var(--glitch-shadow-sm);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 9999px;
+    pointer-events: none;
+    animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Animation from original CSS */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Emoji Rain Animation */
+.emoji-rain-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.1;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+}
+
+.emoji-rain-column {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  user-select: none;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  color: var(--matrix-green);
+  text-shadow: 0 0 5px var(--matrix-green);
+}
+
+@keyframes fall {
+  from { transform: translateY(-100vh); }
+  to { transform: translateY(100vh); }
+}
+
+
+/* Subtle Logo Glitch Animation */
+.logo-container {
+  animation: logo-glitch-subtle 5s infinite steps(1);
+}
+@keyframes logo-glitch-subtle {
+  0%, 95% { transform: none; }
+  96% { transform: translate(-2px, 2px); }
+  97% { transform: translate(2px, -2px); }
+  98% { transform: translate(-2px, -2px); }
+  99% { transform: translate(2px, 2px); }
+  100% { transform: none; }
+}
+
+/* Nullify tailwindcss base styles to avoid conflicts */
+*, ::before, ::after {
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x: ;
+    --tw-pan-y: ;
+    --tw-pinch-zoom: ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-gradient-from-position: ;
+    --tw-gradient-via-position: ;
+    --tw-gradient-to-position: ;
+    --tw-ordinal: ;
+    --tw-slashed-zero: ;
+    --tw-numeric-figure: ;
+    --tw-numeric-spacing: ;
+    --tw-numeric-fraction: ;
+    --tw-ring-inset: ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgb(59 130 246 / 0.5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur: ;
+    --tw-brightness: ;
+    --tw-contrast: ;
+    --tw-grayscale: ;
+    --tw-hue-rotate: ;
+    --tw-invert: ;
+    --tw-saturate: ;
+    --tw-sepia: ;
+    --tw-drop-shadow: ;
+    --tw-backdrop-blur: ;
+    --tw-backdrop-brightness: ;
+    --tw-backdrop-contrast: ;
+    --tw-backdrop-grayscale: ;
+    --tw-backdrop-hue-rotate: ;
+    --tw-backdrop-invert: ;
+    --tw-backdrop-opacity: ;
+    --tw-backdrop-saturate: ;
+    --tw-backdrop-sepia: ;
+}
+
+/* 9. Features Section */
+.features-section {
+  width: 100%;
+  max-width: 1120px; /* 70rem */
+  margin: 0 auto;
+  padding: 64px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.feature-divider-container {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.feature-divider-container::before {
+  content: '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.3;
+  letter-spacing: -2px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.feature-divider-text {
+  position: relative;
+  background: var(--pure-black);
+  padding: 0 24px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.feature-item {
+  max-width: 640px; /* 40rem */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.feature-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: var(--glitch-shadow-sm);
+}
+
+.feature-divider-short, .feature-divider-long {
+  opacity: 0.3;
+  letter-spacing: -2px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.feature-divider-long {
+  width: 100%;
+}
+
+.feature-description {
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+.feature-callout {
+  margin-top: 16px;
+  background: var(--deep-black);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.feature-callout.warning {
+  border-color: var(--glitch-pink);
+  color: var(--glitch-pink);
+}
